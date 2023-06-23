@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragmentos.VerUsuarioFragment"
+    >>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="730dp"
+        android:orientation="vertical"
+        tools:ignore="ExtraText">
+        //Creacion de un contorno para simular la franja que tiene android
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/arribaagre">
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="60dp"
+                android:layout_height="49dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="181dp"
+                android:layout_marginLeft="181dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/user1" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="47dp"
+                android:layout_height="43dp"
+                android:src="@drawable/fllecha" /><![CDATA[
+
+            " />
+        ]]>
+        </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="GESTIÓN DEL PERSONAL"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/CampoId"
+                        android:layout_width="186dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="30dp"
+                        android:ems="10"
+                        android:hint="ID"
+                        android:maxLength="40"
+                        android:textColor="@color/Letras"
+                        android:textColorHighlight="@color/Letras"
+                        android:textColorHint="@color/hints" />
+
+
+                    <Button
+                        android:id="@+id/btningresar"
+                        android:layout_width="147dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="50dp"
+                        android:text="Buscar" />
+                </LinearLayout>
+                <EditText
+                    android:id="@+id/Enombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:ems="10"
+                    android:hint="Nombre"
+                    android:maxLength="40"
+                    android:textColor="@color/Letras"
+                    android:textColorHighlight="@color/Letras"
+                    android:textColorHint="@color/hints" />
+
+                <EditText
+                    android:id="@+id/Eapellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:ems="10"
+                    android:hint="Apellido"
+                    android:textColorHint="@color/hints" />
+
+                <EditText
+                    android:id="@+id/EDNI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:ems="10"
+                    android:hint="DNI"
+                    android:textColorHint="@color/hints" />
+
+                <EditText
+                    android:id="@+id/Edireccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:ems="10"
+                    android:hint="Direccion"
+                    android:textColorHint="@color/hints" />
+
+                <EditText
+                    android:id="@+id/Ecargo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:ems="10"
+                    android:hint="Cargo"
+                    android:textColorHint="@color/hints" />
+
+                <EditText
+                    android:id="@+id/Esalario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:ems="10"
+                    android:hint="Salario"
+                    android:textColorHint="@color/hints" />
+
+                <EditText
+                    android:id="@+id/Ecorreo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:ems="10"
+                    android:hint="Correo"
+                    android:textColorHint="@color/hints" />
+
+                <EditText
+                    android:id="@+id/Etelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:ems="10"
+                    android:hint="Teléfono"
+                    android:textColorHint="@color/hints" />
+                <LinearLayout
+                    android:id="@+id/botones"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnEditar"
+                        android:layout_width="42dp"
+                        android:layout_height="52dp"
+                        android:layout_marginLeft="160dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/naranja"
+                        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+                    <ImageButton
+                        android:id="@+id/btnEliminar"
+                        android:layout_width="50dp"
+                        android:layout_height="52dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/rojoquemado"
+                        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</RelativeLayout>

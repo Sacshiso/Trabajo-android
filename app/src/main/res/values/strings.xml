@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">inicio</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="agregar">Agrepar Platos</string>
+    <string name="editar">Editar Platos</string>
+    <string name="menu">Mostrar Menú</string>
+    <string name="ingre">Gestion de ingredientes</string>
+    <string name="ges">Gestión de Platos</string>
+    <string name="re_1">Formulario de registro de Platos</string>
+    <string name="re_2">Ingrese los datos de forma correcta</string>
+    <string name="re_3">Nombre del plato</string>
+    <string name="re_4">Descripción</string>
+    <string name="re_5">Precio</string>
+    <string name="re_6">Ingredientes</string>
+    <string name="re_7">Categoría</string>
+    <string name="re_8">Estado</string>
+
+    //String de login
+    <string name="lblTitulo">Login</string>
+    <string name="lblUsuario">Ingrese Usuario</string>
+    <string name="lblPassword">Ingrese Contraseña</string>
+    <string name="lblBoton">Acceder</string>
+</resources>
