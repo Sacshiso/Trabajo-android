@@ -15,6 +15,7 @@ import com.example.inicio.fragmentos.RegistroFragment;
 import com.example.inicio.fragmentos.RegistroPlatoFragment;
 import com.example.inicio.fragmentos.RegistroUsuarioFragment;
 import com.example.inicio.fragmentos.SolicitudesFragment;
+import com.example.inicio.fragmentos.UserFragment;
 import com.example.inicio.fragmentos.VerPlatosFragment;
 import com.example.inicio.fragmentos.VerUsuarioFragment;
 import com.example.inicio.interfaces.IComunicaLogin;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements IComunicaPersonal
     Fragment fragmentPlatos,registroPlatosFragment,verPlatosFragment,qrfragment;
 
     //Fragment Login y Menu
-    Fragment fragmentLogin,fragmentMenu,fragmentRegistro;
+    Fragment fragmentLogin,fragmentMenuA,fragmentRegistro,fragmentMenuU;
 
 
     @Override
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements IComunicaPersonal
 
         //Area de login y menu
         fragmentLogin= new LoginFragment();
-        fragmentMenu= new MenuFragment();
+        fragmentMenuA= new MenuFragment();
+        fragmentMenuU= new UserFragment();
         fragmentRegistro= new RegistroFragment();
 
         //Area de Personal
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements IComunicaPersonal
 
     @Override
     public void rectrocesoMenu() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedorfragments,fragmentMenu).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedorfragments,fragmentMenuA).commit();
     }
 
     @Override
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements IComunicaPersonal
 
     @Override
     public void retrocesoM() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedorfragments,fragmentMenu).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedorfragments,fragmentMenuA).commit();
     }
 
     @Override
@@ -136,8 +138,11 @@ public class MainActivity extends AppCompatActivity implements IComunicaPersonal
     }
 
     @Override
-    public void Acceder() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedorfragments,fragmentMenu).commit();
+    public void Admin() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedorfragments,fragmentMenuA).commit();
+    }
+    public void User() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedorfragments,fragmentMenuU).commit();
     }
 
     @Override

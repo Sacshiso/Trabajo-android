@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class Conexion {
     public static Connection connectionclass(){
         Connection con = null;
-        String ip = "192.168.57.13",port="1433",username="root",password="1234",databasename="Birka";
+        String ip = "192.168.57.16",port="1433",username="root",password="1234",databasename="Birka";
         StrictMode.ThreadPolicy tp = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(tp);
         try {
@@ -51,6 +51,36 @@ public class Conexion {
                 }
             }
         }
+    }
+    public static String obtenerCargo(String usuario) {
+        String cargo = null;
+        Connection con = connectionclass();
+        if (con == null) {
+            return null;
+        }
+        String consulta = "SELECT Cargo FROM usuario WHERE Usuario = ?";
+
+        try {
+            PreparedStatement statement = con.prepareStatement(consulta);
+            statement.setString(1, usuario);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                cargo = rs.getString("Cargo");
+            }
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return cargo;
     }
     public boolean existeUsuario(String nombreUsuario) {
         Connection connection = null;

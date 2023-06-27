@@ -96,10 +96,17 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 String usuario = iusuario.getText().toString();
                 String contrasena = icontraseña.getText().toString();
+                String cargo=conexion.obtenerCargo(usuario);
                 boolean ususuarivalido= conexion.validarUsuario(usuario,contrasena);
                 if (ususuarivalido){
                     Toast.makeText(getContext(), "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                    iComunicaLogin.Acceder();
+                    if (cargo!= null){
+                        if (cargo.equals("admin")){
+                            iComunicaLogin.Admin();
+                        } else {
+                            iComunicaLogin.User();
+                        }
+                    }
                 }else {
                     Toast.makeText(getContext(), "Inicio de sesión fallido", Toast.LENGTH_SHORT).show();
                     iusuario.setText("");
