@@ -49,6 +49,8 @@
             android:hint="@string/lblUsuario"
             android:inputType="textPersonName"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -71,19 +73,35 @@
             android:inputType="textPassword"></EditText>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <EditText
+        android:id="@+id/txtid"
+        android:layout_width="186dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="212dp"
+        android:ems="10"
+        android:hint="Ingrese id"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.009" />
+
     <TextView
         android:id="@+id/registrado"
-        android:textColor="@color/text_color_selector"
         android:layout_width="193dp"
         android:layout_height="28dp"
+        android:clickable="true"
         android:text="Ya esta registrado?"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textAlignment="center"
-        android:clickable="true"
-        app:layout_constraintVertical_bias="0.717">
+        app:layout_constraintVertical_bias="0.81">
 
     </TextView>
 
@@ -91,7 +109,7 @@
         android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="56dp"
         android:text="Registrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

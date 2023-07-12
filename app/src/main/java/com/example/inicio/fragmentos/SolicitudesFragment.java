@@ -99,15 +99,22 @@ public class SolicitudesFragment extends Fragment {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ID=CId.getText().toString();
-                String Nombre= CNombre.getText().toString();
-                String Apellido=CApellido.getText().toString();
-                String Mensaje=cMensaje.getText().toString();
-                if (!ID.isEmpty()){
-                    EnviarMensaje(Nombre,Apellido,Mensaje);
+                String idEmpleado = CId.getText().toString();
+                String nombre = CNombre.getText().toString();
+                String apellido = CApellido.getText().toString();
+                String mensaje = cMensaje.getText().toString();
+
+                if (!idEmpleado.isEmpty()) {
+                    int id = Integer.parseInt(idEmpleado);
+                    EnviarMensaje(nombre, apellido, mensaje, id);
+                    Toast.makeText(getContext(),"Mensaje enviado",Toast.LENGTH_SHORT).show();
+                    CId.setText("");
+                    CNombre.setText("");
+                    CApellido.setText("");
                 }
             }
         });
+
     }
     private void buscarEmpleado(int idEmpleado){
         conexion.buscarEmpleado(idEmpleado, new Conexion.EmpleadoCallback() {
@@ -126,7 +133,8 @@ public class SolicitudesFragment extends Fragment {
             }
         });
     }
-    private void EnviarMensaje(String nombre,String apellido, String mensaje){
-        conexion.enviarMensaje(nombre,apellido,mensaje);
+    private void EnviarMensaje(String nombre, String apellido, String mensaje, int idEmpleado) {
+        conexion.enviarMensaje(nombre, apellido, mensaje, idEmpleado);
     }
+
 }

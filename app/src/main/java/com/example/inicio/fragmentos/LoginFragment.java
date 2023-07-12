@@ -2,6 +2,7 @@ package com.example.inicio.fragmentos;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -97,9 +98,19 @@ public class LoginFragment extends Fragment {
                 String usuario = iusuario.getText().toString();
                 String contrasena = icontraseña.getText().toString();
                 String cargo=conexion.obtenerCargo(usuario);
-                boolean ususuarivalido= conexion.validarUsuario(usuario,contrasena);
-                if (ususuarivalido){
+                boolean usuariovalido= conexion.validarUsuario(usuario,contrasena);
+                if (usuariovalido){
                     Toast.makeText(getContext(), "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                    int idEmpleado = conexion.obtenerIdEmpleado(usuario,contrasena);
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("idEmpleado", idEmpleado);
+                    editor.apply();
+                    if (idEmpleado != -1) {
+                        Toast.makeText(getContext(), "ID de empleado guardado correctamente: " + idEmpleado, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "No se pudo obtener el ID de empleado", Toast.LENGTH_SHORT).show();
+                    }
                     if (cargo!= null){
                         if (cargo.equals("admin")){
                             iComunicaLogin.Admin();

@@ -41,7 +41,7 @@ public class RegistroFragment extends Fragment {
     Activity actividad;
 
     EditText reusuario;
-    EditText recontraseña;
+    EditText recontraseña,rid;
     Button registrar;
 
     TextView registrado;
@@ -85,6 +85,7 @@ public class RegistroFragment extends Fragment {
         vista=inflater.inflate(R.layout.fragment_registro, container, false);
         reusuario=vista.findViewById(R.id.txtUsuario);
         recontraseña=vista.findViewById(R.id.txtPassword);
+        rid=vista.findViewById(R.id.txtid);
         //cambio del fragment a la pagina de login
         registrado=vista.findViewById(R.id.registrado);
         registrado.setOnClickListener(new View.OnClickListener() {
@@ -100,19 +101,28 @@ public class RegistroFragment extends Fragment {
             public void onClick(View view) {
                 String usuario = reusuario.getText().toString();
                 String contrasena = recontraseña.getText().toString();
-                if (usuario.isEmpty() || contrasena.isEmpty()) {
-                    Toast.makeText(getContext(), "Ambos campos deben estar llenos", Toast.LENGTH_SHORT).show();
-                    return; // Salir del método sin registrar el usuario
+                String id=rid.getText().toString();
+                if (usuario.isEmpty() || contrasena.isEmpty() || id.isEmpty()) {
+                    Toast.makeText(getContext(), "Los campos deben estar llenos", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
                 if (conexion.existeUsuario(usuario)) {
                     Toast.makeText(getContext(), "Este usuario ya existe", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                conexion.agregarUsuario(usuario, contrasena);
+                // Verificar si el ID existe en la tabla a la que hace referencia
+                if (!conexion.existeEmpleado(Integer.parseInt(id))) {
+                    Toast.makeText(getContext(), "ID no existe", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                conexion.agregarUsuario(usuario, contrasena, Integer.parseInt(id));
                 Toast.makeText(getContext(), "Usuario agregado", Toast.LENGTH_SHORT).show();
                 reusuario.setText("");
                 recontraseña.setText("");
+                rid.setText("");
             }
         });
         return vista;

@@ -3,18 +3,22 @@ package com.example.inicio.Conexion;
 import android.os.StrictMode;
 import android.util.Log;
 
+import com.example.inicio.Clases.Mensaje;
+
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Conexion {
     public static Connection connectionclass(){
         Connection con = null;
-        String ip = "192.168.57.16",port="1433",username="root",password="1234",databasename="Birka";
+        String ip = "192.168.57.20",port="1433",username="root",password="1234",databasename="Birka";
         StrictMode.ThreadPolicy tp = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(tp);
         try {
@@ -26,15 +30,16 @@ public class Conexion {
         }
         return con;
     }
-    public void agregarUsuario(String usuario, String contrasena) {
+    public void agregarUsuario(String usuario, String contrasena,int IdEmpleado) {
         Connection connection = null;
         try {
             connection = connectionclass();
             if (connection != null) {
-                String query = "INSERT INTO usuario (Usuario, Contraseña) VALUES (?, ?)";
+                String query = "INSERT INTO usuario (Usuario, Contraseña,IdEmpleado) VALUES (?, ?,?)";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(1, usuario);
                 statement.setString(2, contrasena);
+                statement.setInt(3, IdEmpleado);
                 statement.executeUpdate();
                 Log.d("Conexion", "Usuario agregado correctamente");
             } else {
@@ -52,6 +57,7 @@ public class Conexion {
             }
         }
     }
+
     public static String obtenerCargo(String usuario) {
         String cargo = null;
         Connection con = connectionclass();
@@ -81,6 +87,106 @@ public class Conexion {
         }
 
         return cargo;
+    }
+    public boolean existeEmpleado(int idEmpleado){
+        Connection connection = null;
+        try {
+            connection = connectionclass();
+            if (connection != null) {
+                String query = "SELECT COUNT(*) AS total FROM Empleado WHERE IdEmpleado = ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setInt(1, idEmpleado);
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            } else {
+                Log.e("Conexion", "No se pudo establecer la conexión");
+            }
+        } catch (SQLException e) {
+            Log.e("Conexion", "Error al verificar la existencia del empleado: " + e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    Log.e("Conexion", "Error al cerrar la conexión: " + e.getMessage());
+                }
+            }
+        }
+        return false;
+    }
+    public int obtenerIdEmpleado(String usuario, String contrasena) {
+        int idEmpleado = -1; // Valor predeterminado si no se encuentra el ID del empleado
+        Connection connection = null;
+
+        try {
+            connection = connectionclass();
+            if (connection != null) {
+                String query = "SELECT IdEmpleado FROM usuario WHERE Usuario = ? AND Contraseña = ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setString(1, usuario);
+                statement.setString(2, contrasena);
+                ResultSet rs = statement.executeQuery();
+
+                if (rs.next()) {
+                    idEmpleado = rs.getInt("IdEmpleado");
+                }
+
+                rs.close();
+                statement.close();
+            }
+        } catch (SQLException e) {
+            Log.e("Conexion", "Error al obtener el ID del empleado: " + e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    Log.e("Conexion", "Error al cerrar la conexión: " + e.getMessage());
+                }
+            }
+        }
+
+        return idEmpleado;
+    }
+    public List<Mensaje> obtenerMensajesPorIdEmpleado(int idEmpleado) {
+        List<Mensaje> mensajesCoincidentes = new ArrayList<>();
+        Connection connection = null;
+        try {
+            connection = connectionclass();
+            if (connection != null) {
+                String query = "SELECT * FROM mensajes WHERE IdEmpleado = ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setInt(1, idEmpleado);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    int IdEmpleado = resultSet.getInt("IdEmpleado");
+                    String Mensaje = resultSet.getString("Mensaje");
+                    Mensaje mensaje = new Mensaje(IdEmpleado, Mensaje);
+                    mensajesCoincidentes.add(mensaje);
+                }
+
+                resultSet.close();
+                statement.close();
+            } else {
+                Log.e("Conexion", "No se pudo establecer la conexión");
+            }
+        } catch (SQLException e) {
+            Log.e("Conexion", "Error al obtener los mensajes por ID de empleado: " + e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    Log.e("Conexion", "Error al cerrar la conexión: " + e.getMessage());
+                }
+            }
+        }
+
+        return mensajesCoincidentes;
     }
     public boolean existeUsuario(String nombreUsuario) {
         Connection connection = null;
@@ -266,16 +372,17 @@ public class Conexion {
         }
     }
     //
-    public void enviarMensaje(String nombre, String apellido, String mensaje) {
+    public void enviarMensaje(String nombre, String apellido, String mensaje, int idEmpleado) {
         Connection connection = null;
         try {
             connection = connectionclass();
             if (connection != null) {
-                String query = "INSERT INTO Mensajes (Nombre, Apellido, Mensaje) VALUES (?, ?, ?)";
+                String query = "INSERT INTO Mensajes (Nombre, Apellido, Mensaje, IdEmpleado) VALUES (?, ?, ?, ?)";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(1, nombre);
                 statement.setString(2, apellido);
                 statement.setString(3, mensaje);
+                statement.setInt(4, idEmpleado);
                 statement.executeUpdate();
                 Log.i("Conexion", "Mensaje enviado correctamente");
             } else {
@@ -293,6 +400,7 @@ public class Conexion {
             }
         }
     }
+
 
 
     public void editarEmpleado(String nombre, String apellido, String dni, String direccion, String cargo, String telefono, String correo, int salario) {

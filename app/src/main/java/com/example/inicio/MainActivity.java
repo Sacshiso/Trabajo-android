@@ -17,6 +17,7 @@ import com.example.inicio.fragmentos.RegistroUsuarioFragment;
 import com.example.inicio.fragmentos.SolicitudesFragment;
 import com.example.inicio.fragmentos.UserFragment;
 import com.example.inicio.fragmentos.VerPlatosFragment;
+import com.example.inicio.fragmentos.VerSolicitudesFragment;
 import com.example.inicio.fragmentos.VerUsuarioFragment;
 import com.example.inicio.interfaces.IComunicaLogin;
 import com.example.inicio.interfaces.IComunicaMenu;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements IComunicaPersonal
     Fragment fragmentPlatos,registroPlatosFragment,verPlatosFragment,qrfragment;
 
     //Fragment Login y Menu
-    Fragment fragmentLogin,fragmentMenuA,fragmentRegistro,fragmentMenuU;
+    Fragment fragmentLogin,fragmentMenuA,fragmentRegistro,fragmentMenuU,fragmentMensaje;
 
 
     @Override
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements IComunicaPersonal
         fragmentMenuA= new MenuFragment();
         fragmentMenuU= new UserFragment();
         fragmentRegistro= new RegistroFragment();
+        fragmentMensaje= new VerSolicitudesFragment();
 
         //Area de Personal
         fragmentPersonal = new PersonalFragment();
@@ -154,5 +156,10 @@ public class MainActivity extends AppCompatActivity implements IComunicaPersonal
     public void Login() {
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedorfragments,fragmentLogin).commit();
     }
+    @Override
+    public void Mensaje() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedorfragments,fragmentMensaje).commit();
+    }
     //Fin del Area de Llamados
+
 }
